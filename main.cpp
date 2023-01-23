@@ -14,6 +14,9 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
+	//	インスタンス
+	Enemy* enemy = new Enemy;
+
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -27,6 +30,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		/// ↓更新処理ここから
 		///
 
+		enemy->Update();
+
 		///
 		/// ↑更新処理ここまで
 		///
@@ -34,6 +39,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		///
 		/// ↓描画処理ここから
 		///
+
+		enemy->Draw();
 
 		///
 		/// ↑描画処理ここまで
@@ -47,6 +54,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 			break;
 		}
 	}
+
+	delete enemy;
 
 	// ライブラリの終了
 	Novice::Finalize();

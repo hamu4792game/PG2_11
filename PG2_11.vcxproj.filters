@@ -17,6 +17,9 @@
     <Filter Include="Enemy">
       <UniqueIdentifier>{ec8254fe-847a-4e1c-b0a0-1d071703736a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{a1104c88-d2e4-47a7-9b78-20623d2d5da1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -37,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +126,9 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
