@@ -1,6 +1,7 @@
 ﻿#include <Novice.h>
+#include "Enemy.h"
 
-const char* kWindowTitle = "学籍番号";
+const char* kWindowTitle = "PG2_11-";
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In_ int nShowCmd) {
