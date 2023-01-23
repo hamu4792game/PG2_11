@@ -14,6 +14,10 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
+	Enemy* enemyA = new Enemy(100, 300, 4, 0);
+	Enemy* enemyB = new Enemy(300, 300, -4, 0);
+
+
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -26,6 +30,20 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		///
 		/// ↓更新処理ここから
 		///
+		enemyA->Update();
+		enemyB->Update();
+
+		// エネミー同士の当たり判定処理
+		float distX = enemyA->getPosX() - enemyB->getPosX();
+		float distY = enemyA->getPosY() - enemyB->getPosY();
+		float dist = (distX * distX) + (distY * distY);
+		int radius = enemyA->getRadius() + enemyB->getRadius();
+		if (dist <= radius * radius) {
+			enemyA->setSpeedX(enemyA->getSpeedX() * -1);
+			enemyA->setSpeedY(4);
+			enemyB->setSpeedX(enemyB->getSpeedX() * -1);
+			enemyB->setSpeedY(-3);
+		}
 
 		///
 		/// ↑更新処理ここまで
@@ -34,6 +52,9 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		///
 		/// ↓描画処理ここから
 		///
+
+		enemyA->Draw();
+		enemyB->Draw();
 
 		///
 		/// ↑描画処理ここまで
@@ -47,6 +68,9 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 			break;
 		}
 	}
+
+	delete enemyA;
+	delete enemyB;
 
 	// ライブラリの終了
 	Novice::Finalize();
