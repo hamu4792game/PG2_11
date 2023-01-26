@@ -1,7 +1,8 @@
 ﻿#include <Novice.h>
-#include "Enemy.h"
+#include "EnemyA.h"
+#include "EnemyB.h"
 
-const char* kWindowTitle = "PG2_11-";
+const char* kWindowTitle = "PG2_11-3";
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In_ int nShowCmd) {
@@ -15,7 +16,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 	char preKeys[256] = {0};
 
 	//	インスタンス
-	Enemy* enemy = new Enemy;
+	EnemyA* enemyA = new EnemyA({ 100.0f,100.0f }, 10.0f, { 30.0f,30.0f });
+	EnemyB* enemyB = new EnemyB({ 700.0f,360.0f }, 50.0f, { 15.0f,0.0f });
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -30,7 +32,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		/// ↓更新処理ここから
 		///
 
-		enemy->Update();
+		enemyA->Update();
+		enemyB->Update();
 
 		///
 		/// ↑更新処理ここまで
@@ -40,7 +43,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		/// ↓描画処理ここから
 		///
 
-		enemy->Draw();
+		enemyA->Draw();
+		enemyB->Draw();
 
 		///
 		/// ↑描画処理ここまで
@@ -55,7 +59,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		}
 	}
 
-	delete enemy;
+	delete enemyA;
+	delete enemyB;
 
 	// ライブラリの終了
 	Novice::Finalize();
