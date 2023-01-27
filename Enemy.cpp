@@ -1,10 +1,12 @@
 #include "Enemy.h"
 #include <Novice.h>
 
-Enemy::Enemy() {
-	pos_ = { 100.0f,100.0f };
-	speed_ = { 10.0f,10.0f };
-	radius_ = 10.0f;
+bool Enemy::isAlive = true;
+
+Enemy::Enemy(Vec2 pos, Vec2 speed, float rad) {
+	pos_ = pos;
+	speed_ = speed;
+	radius_ = rad;
 }
 
 void Enemy::Limit() {
@@ -32,11 +34,18 @@ void Enemy::Limit() {
 }
 
 void Enemy::Update() {
-	pos_.x += speed_.x;
-	pos_.y += speed_.y;
-	Limit();
+	if (isAlive)
+	{
+		pos_.x += speed_.x;
+		//	pos_.y += speed_.y;
+		Limit();
+	}
+	
 }
 
 void Enemy::Draw() {
-	Novice::DrawEllipse(pos_.x, pos_.y, radius_, radius_, 0.0f, 0xff0000ff, kFillModeSolid);
+	if (isAlive)
+	{
+		Novice::DrawEllipse(pos_.x, pos_.y, radius_, radius_, 0.0f, 0xff0000ff, kFillModeSolid);
+	}
 }

@@ -15,7 +15,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 	char preKeys[256] = {0};
 
 	//	インスタンス
-	Enemy* enemy = new Enemy;
+	Enemy* enemy1 = new Enemy({ 50.0f,100.0f }, { 10.0f,10.0f }, 50.0f);
+	Enemy* enemy2 = new Enemy({ 500.0f,400.0f }, { 10.0f,10.0f }, 50.0f);
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -30,7 +31,16 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		/// ↓更新処理ここから
 		///
 
-		enemy->Update();
+		
+		enemy1->Update();
+		enemy2->Update();
+		if (keys[DIK_SPACE])
+		{
+			enemy1->isAlive = false;
+		}else if (keys[DIK_R])
+		{
+			enemy1->isAlive = true;
+		}
 
 		///
 		/// ↑更新処理ここまで
@@ -40,7 +50,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		/// ↓描画処理ここから
 		///
 
-		enemy->Draw();
+		enemy1->Draw();
+		enemy2->Draw();
 
 		///
 		/// ↑描画処理ここまで
@@ -55,7 +66,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		}
 	}
 
-	delete enemy;
+	delete enemy1;
+	delete enemy2;
 
 	// ライブラリの終了
 	Novice::Finalize();
