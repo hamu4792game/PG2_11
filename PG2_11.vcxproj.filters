@@ -20,6 +20,9 @@
     <Filter Include="Object">
       <UniqueIdentifier>{a1104c88-d2e4-47a7-9b78-20623d2d5da1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{b4fdb732-4667-4fbb-af92-34e67c606890}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -41,8 +44,11 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
     <ClCompile Include="Object.cpp">
-      <Filter>KamataEngine</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

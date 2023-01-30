@@ -1,4 +1,5 @@
 ﻿#include <Novice.h>
+#include "Player.h"
 #include "Enemy.h"
 
 const char* kWindowTitle = "PG2_11-";
@@ -15,6 +16,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 	char preKeys[256] = {0};
 
 	//	インスタンス
+	Player* player = new Player();
 	Enemy* enemy1 = new Enemy({ 50.0f,100.0f }, { 10.0f,10.0f }, 50.0f);
 	Enemy* enemy2 = new Enemy({ 500.0f,400.0f }, { 10.0f,10.0f }, 50.0f);
 

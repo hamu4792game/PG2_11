@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include <Novice.h>
+#include "Player.h"
 
 bool Enemy::isAlive = true;
 
@@ -39,6 +40,10 @@ void Enemy::Update() {
 		pos_.x += speed_.x;
 		//	pos_.y += speed_.y;
 		Limit();
+		if (Collision(player->getPos(), player->getRad(), this->pos_, this->radius_))
+		{
+			isAlive = false;
+		}
 	}
 	
 }
