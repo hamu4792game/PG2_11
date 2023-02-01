@@ -1,8 +1,10 @@
 ﻿#include <Novice.h>
+#include "Key/Key.h"
 #include "Player.h"
+#include "Bullet.h"
 #include "Enemy.h"
 
-const char* kWindowTitle = "PG2_11-";
+const char* kWindowTitle = "PG2_13-1";
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In_ int nShowCmd) {
@@ -10,10 +12,6 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 	// ライブラリの初期化
 	int kWindowWidth = 1280, kWindowHeight = 720;
 	Novice::Initialize(kWindowTitle, kWindowWidth, kWindowHeight);
-
-	// キー入力結果を受け取る箱
-	char keys[256] = {0};
-	char preKeys[256] = {0};
 
 	//	インスタンス
 	Player* player = new Player();
@@ -26,23 +24,35 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		Novice::BeginFrame();
 
 		// キー入力を受け取る
-		memcpy(preKeys, keys, 256);
-		Novice::GetHitKeyStateAll(keys);
+		Key::Input();
 
 		///
 		/// ↓更新処理ここから
 		///
 
-		
-		enemy1->Update();
-		enemy2->Update();
-		if (keys[DIK_SPACE])
-		{
-			enemy1->isAlive = false;
-		}else if (keys[DIK_R])
+		if (Key::IsTrigger(DIK_R))
 		{
 			enemy1->isAlive = true;
 		}
+		
+		player->Update();
+		enemy1->Update();
+		enemy2->Update();
+
+		//	衝突判定
+		for (int i = 0; i < 10; i++)
+		{
+			if (Collision(player->getBulletPos(i), player->getBulletRad(i), enemy1->getPos(), enemy1->getRad()))
+			{
+				enemy1->isAlive = false;
+			}
+			if (Collision(player->getBulletPos(i), player->getBulletRad(i), enemy2->getPos(), enemy2->getRad()))
+			{
+				enemy2->isAlive = false;
+			}
+		}
+		
+		
 
 		///
 		/// ↑更新処理ここまで
@@ -51,7 +61,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		///
 		/// ↓描画処理ここから
 		///
-
+		player->Draw();
 		enemy1->Draw();
 		enemy2->Draw();
 
@@ -63,11 +73,12 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR lpCmdLine, _In
 		Novice::EndFrame();
 
 		// ESCキーが押されたらループを抜ける
-		if (preKeys[DIK_ESCAPE] == 0 && keys[DIK_ESCAPE] != 0) {
+		if (Key::IsTrigger(DIK_ESCAPE)) {
 			break;
 		}
 	}
 
+	delete player;
 	delete enemy1;
 	delete enemy2;
 

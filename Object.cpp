@@ -1,11 +1,11 @@
 #include "Object.h"
 #include "math.h"
 
-bool Object::Collision(Vec2 pos1, float rad1, Vec2 pos2, float rad2) {
+bool Collision(Object::Vec2 pos1, float radius1, Object::Vec2 pos2, float radius2) {
 	float a = pos1.x - pos2.x;
 	float b = pos1.y - pos2.y;
 	float distance = sqrtf(a * a + b * b);
-	if (distance <= rad1 + rad2)
+	if (distance <= radius1 + radius2)
 	{
 		return true;
 	}

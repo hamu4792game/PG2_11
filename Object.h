@@ -13,9 +13,9 @@ protected:
 	float radius_;
 
 public:
-	bool Collision(Vec2 pos1, float rad1, Vec2 pos2, float rad2);
 	virtual void Update();
 	virtual void Draw();
 
 };
 
+bool Collision(Object::Vec2 pos1, float radius1, Object::Vec2 pos2, float radius2);

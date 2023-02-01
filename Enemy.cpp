@@ -8,6 +8,12 @@ Enemy::Enemy(Vec2 pos, Vec2 speed, float rad) {
 	pos_ = pos;
 	speed_ = speed;
 	radius_ = rad;
+
+	player = new Player;
+}
+
+Enemy::~Enemy() {
+	delete player;
 }
 
 void Enemy::Limit() {
@@ -40,12 +46,7 @@ void Enemy::Update() {
 		pos_.x += speed_.x;
 		//	pos_.y += speed_.y;
 		Limit();
-		if (Collision(player->getPos(), player->getRad(), this->pos_, this->radius_))
-		{
-			isAlive = false;
-		}
 	}
-	
 }
 
 void Enemy::Draw() {
@@ -53,4 +54,12 @@ void Enemy::Draw() {
 	{
 		Novice::DrawEllipse(pos_.x, pos_.y, radius_, radius_, 0.0f, 0xff0000ff, kFillModeSolid);
 	}
+}
+
+Object::Vec2 Enemy::getPos() {
+	return pos_;
+}
+
+float Enemy::getRad() {
+	return radius_;
 }
